@@ -1,3 +1,5 @@
+import math
+from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
@@ -89,6 +91,8 @@ class DemandForecast(BaseModel):
     forecasted_demand: int
     trend: str
     period: str
+    unit_cost: float
+    lead_time_days: int
 
 class BacklogItem(BaseModel):
     id: str
@@ -119,6 +123,51 @@ class CreatePurchaseOrderRequest(BaseModel):
     unit_cost: float
     expected_delivery_date: str
     notes: Optional[str] = None
+
+class RestockRecommendation(BaseModel):
+    sku: str
+    name: str
+    trend: str
+    gap: int
+    unit_cost: float
+    lead_time_days: int
+    recommended_qty: int
+    line_total: float
+
+class RestockRecommendations(BaseModel):
+    budget: float
+    max_budget: float
+    total: float
+    items: List[RestockRecommendation]
+
+class RestockLine(BaseModel):
+    sku: str
+    quantity: int
+
+class RestockOrderLine(BaseModel):
+    sku: str
+    name: str
+    quantity: int
+    unit_price: float
+    lead_time_days: int
+
+class CreateRestockOrderRequest(BaseModel):
+    budget: float
+    items: List[RestockLine]
+
+class RestockOrder(BaseModel):
+    id: str
+    order_number: str
+    items: List[RestockOrderLine]
+    status: str
+    budget: float
+    total_value: float
+    order_date: str
+    lead_time_days: int
+    expected_delivery: str
+
+# Restocking orders submitted during this server run (in memory only, reset on restart)
+submitted_orders: List[dict] = []
 
 # API endpoints
 @app.get("/")
@@ -303,6 +352,104 @@ def get_monthly_trends():
     result = list(months.values())
     result.sort(key=lambda x: x['month'])
     return result
+
+def get_restock_candidates() -> list:
+    """Forecast items whose demand is growing, biggest gap first."""
+    candidates = [f for f in demand_forecasts if f["forecasted_demand"] > f["current_demand"]]
+    # Ties on gap go to items with an "increasing" trend
+    candidates.sort(key=lambda f: (-(f["forecasted_demand"] - f["current_demand"]), f["trend"] != "increasing"))
+    return candidates
+
+@app.get("/api/restocking/recommendations", response_model=RestockRecommendations)
+def get_restock_recommendations(budget: float = 0):
+    """Recommend restock quantities that fit within the budget"""
+    if budget < 0:
+        raise HTTPException(status_code=400, detail="Budget must not be negative")
+
+    candidates = get_restock_candidates()
+    max_budget = round(sum((f["forecasted_demand"] - f["current_demand"]) * f["unit_cost"] for f in candidates), 2)
+
+    # Greedy fill: cover each item's full demand gap while it fits. The first item that
+    # doesn't fit gets a partial quantity, and filling stops there so that lower-priority
+    # items never jump ahead of a higher-priority one.
+    remaining = budget
+    items = []
+    for f in candidates:
+        gap = f["forecasted_demand"] - f["current_demand"]
+        qty = min(gap, math.floor(remaining / f["unit_cost"] + 1e-9))
+        if qty <= 0:
+            break
+        line_total = round(qty * f["unit_cost"], 2)
+        remaining -= line_total
+        items.append({
+            "sku": f["item_sku"],
+            "name": f["item_name"],
+            "trend": f["trend"],
+            "gap": gap,
+            "unit_cost": f["unit_cost"],
+            "lead_time_days": f["lead_time_days"],
+            "recommended_qty": qty,
+            "line_total": line_total,
+        })
+        if qty < gap:
+            break
+
+    return {
+        "budget": budget,
+        "max_budget": max_budget,
+        "total": round(sum(i["line_total"] for i in items), 2),
+        "items": items,
+    }
+
+@app.get("/api/restocking/orders", response_model=List[RestockOrder])
+def get_restock_orders():
+    """Get submitted restocking orders, newest first"""
+    return list(reversed(submitted_orders))
+
+@app.post("/api/restocking/orders", response_model=RestockOrder, status_code=201)
+def create_restock_order(request: CreateRestockOrderRequest):
+    """Submit a restocking order"""
+    if not request.items:
+        raise HTTPException(status_code=400, detail="Order must contain at least one item")
+
+    forecasts_by_sku = {f["item_sku"]: f for f in demand_forecasts}
+    lines = []
+    for line in request.items:
+        forecast = forecasts_by_sku.get(line.sku)
+        if not forecast:
+            raise HTTPException(status_code=400, detail=f"Unknown SKU {line.sku}")
+        if line.quantity <= 0:
+            raise HTTPException(status_code=400, detail=f"Quantity for {line.sku} must be positive")
+        # Price comes from the forecast data, never from the client
+        lines.append({
+            "sku": line.sku,
+            "name": forecast["item_name"],
+            "quantity": line.quantity,
+            "unit_price": forecast["unit_cost"],
+            "lead_time_days": forecast["lead_time_days"],
+        })
+
+    total = round(sum(l["quantity"] * l["unit_price"] for l in lines), 2)
+    if total > request.budget:
+        raise HTTPException(status_code=400, detail=f"Order total {total} exceeds budget {request.budget}")
+
+    # The order ships complete, so it arrives when its slowest item does
+    lead_time = max(l["lead_time_days"] for l in lines)
+    now = datetime.now().replace(microsecond=0)
+    seq = len(submitted_orders) + 1
+    order = {
+        "id": f"RST-{seq}",
+        "order_number": f"RST-{now.year}-{seq:04d}",
+        "items": lines,
+        "status": "Submitted",
+        "budget": request.budget,
+        "total_value": total,
+        "order_date": now.isoformat(),
+        "lead_time_days": lead_time,
+        "expected_delivery": (now + timedelta(days=lead_time)).isoformat(),
+    }
+    submitted_orders.append(order)
+    return order
 
 if __name__ == "__main__":
     import uvicorn

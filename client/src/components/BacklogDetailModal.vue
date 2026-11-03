@@ -155,20 +155,20 @@ const formatDate = (dateString) => {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e4e4e1;
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
   letter-spacing: -0.025em;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: #68646f;
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
@@ -179,8 +179,8 @@ const formatDate = (dateString) => {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: #f1f1ef;
+  color: #0a0011;
 }
 
 .modal-body {
@@ -194,14 +194,14 @@ const formatDate = (dateString) => {
   align-items: center;
   gap: 1.25rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e4e4e1;
   margin-bottom: 1.5rem;
 }
 
 .shortage-icon {
   width: 64px;
   height: 64px;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  background: #c4122f;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -218,13 +218,13 @@ const formatDate = (dateString) => {
 .item-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
   margin: 0 0 0.5rem 0;
 }
 
 .item-sku {
   font-size: 0.875rem;
-  color: #64748b;
+  color: #68646f;
   font-family: 'Monaco', 'Courier New', monospace;
 }
 
@@ -240,17 +240,17 @@ const formatDate = (dateString) => {
 
 .priority-badge.high {
   background: #fecaca;
-  color: #991b1b;
+  color: #c4122f;
 }
 
 .priority-badge.medium {
   background: #fed7aa;
-  color: #92400e;
+  color: #a64b00;
 }
 
 .priority-badge.low {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #e6dcff;
+  color: #7500c0;
 }
 
 .shortage-summary {
@@ -281,22 +281,22 @@ const formatDate = (dateString) => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
+  color: #68646f;
   margin-bottom: 0.5rem;
 }
 
 .summary-value {
   font-size: 1.875rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
 }
 
 .summary-card.danger .summary-value {
-  color: #dc2626;
+  color: #c4122f;
 }
 
 .summary-card.warning .summary-value {
-  color: #f59e0b;
+  color: #a64b00;
 }
 
 .info-grid {
@@ -316,24 +316,24 @@ const formatDate = (dateString) => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
+  color: #68646f;
 }
 
 .info-value {
   font-size: 0.938rem;
-  color: #0f172a;
+  color: #0a0011;
   font-weight: 500;
 }
 
 .info-value.order-id,
 .info-value.sku {
   font-family: 'Monaco', 'Courier New', monospace;
-  color: #2563eb;
+  color: #a100ff;
 }
 
 .modal-footer {
   padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e4e4e1;
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
@@ -341,20 +341,20 @@ const formatDate = (dateString) => {
 
 .btn-secondary {
   padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: #f1f1ef;
+  border: 1px solid #e4e4e1;
   border-radius: 8px;
   font-weight: 500;
   font-size: 0.875rem;
-  color: #334155;
+  color: #33303a;
   cursor: pointer;
   transition: all 0.15s ease;
   font-family: inherit;
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
+  background: #e4e4e1;
+  border-color: #cfcfcf;
 }
 
 /* Modal transition animations */

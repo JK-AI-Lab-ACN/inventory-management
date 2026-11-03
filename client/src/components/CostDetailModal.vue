@@ -181,20 +181,20 @@ const close = () => {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e4e4e1;
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
   letter-spacing: -0.025em;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: #68646f;
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
@@ -205,8 +205,8 @@ const close = () => {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: #f1f1ef;
+  color: #0a0011;
 }
 
 .modal-body {
@@ -226,7 +226,7 @@ const close = () => {
 }
 
 .summary-card.total {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: #a100ff;
   color: white;
 }
 
@@ -257,8 +257,8 @@ const close = () => {
 }
 
 .cost-item.procurement {
-  border-color: #93c5fd;
-  background: #eff6ff;
+  border-color: #c2a3ff;
+  background: #f6f1ff;
 }
 
 .cost-item.operational {
@@ -294,22 +294,22 @@ const close = () => {
 }
 
 .cost-item.procurement .cost-icon {
-  background: #3b82f6;
+  background: #a100ff;
   color: white;
 }
 
 .cost-item.operational .cost-icon {
-  background: #8b5cf6;
+  background: #7500c0;
   color: white;
 }
 
 .cost-item.labor .cost-icon {
-  background: #10b981;
+  background: #0b7a4b;
   color: white;
 }
 
 .cost-item.overhead .cost-icon {
-  background: #f59e0b;
+  background: #a64b00;
   color: white;
 }
 
@@ -319,7 +319,7 @@ const close = () => {
 
 .cost-name {
   font-weight: 600;
-  color: #0f172a;
+  color: #0a0011;
   font-size: 1rem;
   margin-bottom: 0.25rem;
 }
@@ -327,38 +327,38 @@ const close = () => {
 .cost-amount {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
 }
 
 .cost-percentage {
   font-size: 0.875rem;
-  color: #64748b;
+  color: #68646f;
   font-weight: 500;
 }
 
 .modal-footer {
   padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e4e4e1;
   display: flex;
   justify-content: flex-end;
 }
 
 .btn-secondary {
   padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: #f1f1ef;
+  border: 1px solid #e4e4e1;
   border-radius: 8px;
   font-weight: 500;
   font-size: 0.875rem;
-  color: #334155;
+  color: #33303a;
   cursor: pointer;
   transition: all 0.15s ease;
   font-family: inherit;
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
+  background: #e4e4e1;
+  border-color: #cfcfcf;
 }
 
 /* Modal transition animations */

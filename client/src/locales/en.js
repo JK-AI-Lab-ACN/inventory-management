@@ -6,6 +6,10 @@ export default {
     orders: 'Orders',
     finance: 'Finance',
     demandForecast: 'Demand Forecast',
+    restocking: 'Restocking',
+    reports: 'Reports',
+    mainNavigation: 'Main navigation',
+    openNavigation: 'Open navigation',
     companyName: 'Catalyst Components',
     subtitle: 'Inventory Management System'
   },
@@ -126,6 +130,43 @@ export default {
       status: 'Status',
       expectedDelivery: 'Expected Delivery',
       actualDelivery: 'Actual Delivery'
+    },
+    submittedOrders: {
+      title: 'Submitted Orders',
+      empty: 'No restocking orders have been submitted yet.',
+      leadTime: 'Lead Time',
+      days: '{count} days'
+    }
+  },
+
+  // Restocking
+  restocking: {
+    title: 'Restocking',
+    description: 'Plan purchase orders against a budget using demand forecasts',
+    budgetLabel: 'Restocking Budget',
+    budgetMax: 'Max needed: {amount}',
+    recommendationsTitle: 'Recommended Items',
+    selectedTotal: 'Selected Total',
+    ofBudget: 'of {amount} budget',
+    remaining: 'Remaining Budget',
+    leadTime: 'Order Lead Time',
+    overBudget: 'Selected total exceeds the budget by {amount}. Reduce quantities or deselect items to place the order.',
+    placeOrder: 'Place Order',
+    placing: 'Placing order...',
+    success: 'Order {orderNumber} submitted.',
+    viewOrders: 'View in Orders',
+    empty: 'No items to restock at this budget. Increase the budget to see recommendations.',
+    days: '{count} days',
+    orderFailed: 'Failed to place order',
+    table: {
+      select: 'Select',
+      item: 'Item',
+      trend: 'Trend',
+      gap: 'Demand Gap',
+      unitCost: 'Unit Cost',
+      quantity: 'Quantity',
+      lineTotal: 'Line Total',
+      leadTime: 'Lead Time'
     }
   },
 
@@ -206,7 +247,8 @@ export default {
     backordered: 'Backordered',
     inStock: 'In Stock',
     lowStock: 'Low Stock',
-    adequate: 'Adequate'
+    adequate: 'Adequate',
+    submitted: 'Submitted'
   },
 
   // Trends

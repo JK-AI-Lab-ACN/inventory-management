@@ -61,7 +61,7 @@
               <div class="info-item">
                 <div class="info-label">Units Remaining</div>
                 <div class="info-value">
-                  <span :style="{ color: inventoryItem.quantity_on_hand <= inventoryItem.reorder_point ? '#ef4444' : '#10b981' }">
+                  <span :style="{ color: inventoryItem.quantity_on_hand <= inventoryItem.reorder_point ? '#c4122f' : '#0b7a4b' }">
                     {{ inventoryItem.quantity_on_hand - inventoryItem.reorder_point }} units
                   </span>
                 </div>
@@ -206,20 +206,20 @@ const getSummaryCardClass = () => {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e4e4e1;
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
   letter-spacing: -0.025em;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: #68646f;
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
@@ -230,8 +230,8 @@ const getSummaryCardClass = () => {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: #f1f1ef;
+  color: #0a0011;
 }
 
 .modal-body {
@@ -245,7 +245,7 @@ const getSummaryCardClass = () => {
   align-items: center;
   gap: 1.25rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e4e4e1;
   margin-bottom: 1.5rem;
 }
 
@@ -261,15 +261,15 @@ const getSummaryCardClass = () => {
 }
 
 .item-icon.success-icon {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: #0b7a4b;
 }
 
 .item-icon.warning-icon {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: #a64b00;
 }
 
 .item-icon.danger-icon {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  background: #c4122f;
 }
 
 .item-title-section {
@@ -280,13 +280,13 @@ const getSummaryCardClass = () => {
 .item-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
   margin: 0 0 0.5rem 0;
 }
 
 .item-sku {
   font-size: 0.875rem;
-  color: #64748b;
+  color: #68646f;
   font-family: 'Monaco', 'Courier New', monospace;
 }
 
@@ -302,17 +302,17 @@ const getSummaryCardClass = () => {
 
 .stock-badge.success {
   background: #d1fae5;
-  color: #065f46;
+  color: #0b7a4b;
 }
 
 .stock-badge.warning {
   background: #fed7aa;
-  color: #92400e;
+  color: #a64b00;
 }
 
 .stock-badge.danger {
   background: #fecaca;
-  color: #991b1b;
+  color: #c4122f;
 }
 
 .stock-summary {
@@ -329,8 +329,8 @@ const getSummaryCardClass = () => {
 }
 
 .summary-card.primary {
-  border-color: #bfdbfe;
-  background: #eff6ff;
+  border-color: #c2a3ff;
+  background: #f6f1ff;
 }
 
 .summary-card.success-card {
@@ -353,19 +353,19 @@ const getSummaryCardClass = () => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
+  color: #68646f;
   margin-bottom: 0.5rem;
 }
 
 .summary-value {
   font-size: 1.875rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #0a0011;
 }
 
 .summary-subtitle {
   font-size: 0.75rem;
-  color: #64748b;
+  color: #68646f;
   margin-top: 0.25rem;
 }
 
@@ -386,24 +386,24 @@ const getSummaryCardClass = () => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
+  color: #68646f;
 }
 
 .info-value {
   font-size: 0.938rem;
-  color: #0f172a;
+  color: #0a0011;
   font-weight: 500;
 }
 
 .info-value.total-value {
   font-size: 1.125rem;
-  color: #2563eb;
+  color: #a100ff;
   font-weight: 700;
 }
 
 .modal-footer {
   padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e4e4e1;
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
@@ -411,20 +411,20 @@ const getSummaryCardClass = () => {
 
 .btn-secondary {
   padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: #f1f1ef;
+  border: 1px solid #e4e4e1;
   border-radius: 8px;
   font-weight: 500;
   font-size: 0.875rem;
-  color: #334155;
+  color: #33303a;
   cursor: pointer;
   transition: all 0.15s ease;
   font-family: inherit;
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
+  background: #e4e4e1;
+  border-color: #cfcfcf;
 }
 
 /* Modal transition animations */
